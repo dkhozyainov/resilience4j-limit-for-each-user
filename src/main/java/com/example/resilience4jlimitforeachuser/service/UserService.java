@@ -2,13 +2,16 @@ package com.example.resilience4jlimitforeachuser.service;
 
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
 @Service
 public class UserService {
+    private int counter;
+    private String userId = "userId";
 
     public String getRandomUserId() {
-        UUID userId = UUID.randomUUID();
-        return userId.toString();
+        if (counter % 5 == 0) {
+            userId = userId + counter;
+        }
+        counter++;
+        return userId;
     }
 }

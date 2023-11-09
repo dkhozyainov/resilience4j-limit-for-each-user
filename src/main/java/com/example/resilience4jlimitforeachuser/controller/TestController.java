@@ -3,7 +3,6 @@ package com.example.resilience4jlimitforeachuser.controller;
 
 import com.example.resilience4jlimitforeachuser.service.RateLimiterRecipientInfoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,12 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
     private final RateLimiterRecipientInfoService rateLimiterRecipientInfoService;
 
-
     @GetMapping("/limited")
-    public ResponseEntity<String> getRecipientInfo(@RequestParam(value = "length") Integer length) {
-        String res = rateLimiterRecipientInfoService.getRecipientInfoByPhone(length);
-        return res == null
-                ? ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).build()
-                : ResponseEntity.ok(res);
+    public ResponseEntity<String> getSomethingInfo(@RequestParam(value = "length") Integer length) {
+        String res = rateLimiterRecipientInfoService.getTestInfo(length);
+        return ResponseEntity.ok(res);
     }
 }
