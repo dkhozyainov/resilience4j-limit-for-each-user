@@ -1,7 +1,6 @@
 package com.example.resilience4jlimitforeachuser.service;
 
 import io.github.resilience4j.ratelimiter.RateLimiter;
-import io.github.resilience4j.ratelimiter.RequestNotPermitted;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,15 +16,10 @@ public class RateLimiterRecipientInfoService {
     private final TargetService targetService;
     private final UserService userService;
 
-    public String getRecipientInfoByPhone(Integer length) {
-        try {
-            Function<String, String> rateLimiterDecorator = RateLimiter.decorateFunction(
-                    rateLimiterManager.getLimiter(userService.getRandomUserId(), "recipientInfoByPhone"),
-                    targetService::getSomethingUsefulResult);
-            return rateLimiterDecorator.apply(String.valueOf(length));
-        } catch (RequestNotPermitted requestNotPermitted) {
-            log.error(requestNotPermitted.getMessage());
-            return null;
-        }
+    public String getTestInfo(Integer length) {
+        Function<String, String> rateLimiterDecorator = RateLimiter.decorateFunction(
+                rateLimiterManager.getLimiter(userService.getRandomUserId(), "testRatelimiter"),
+                targetService::getSomethingUsefulResult);
+        return rateLimiterDecorator.apply(String.valueOf(length));
     }
 }
