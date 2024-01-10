@@ -2,7 +2,7 @@
 resilience4j:
   ratelimiter:
     instances:
-      testRatelimiter:
+      testRateLimiter:
         limitForPeriod: 3
         limitRefreshPeriod: 1s
         timeoutDuration: 10ms
