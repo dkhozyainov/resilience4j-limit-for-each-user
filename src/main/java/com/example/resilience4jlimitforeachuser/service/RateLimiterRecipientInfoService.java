@@ -18,7 +18,7 @@ public class RateLimiterRecipientInfoService {
 
     public String getTestInfo(Integer length) {
         Function<String, String> rateLimiterDecorator = RateLimiter.decorateFunction(
-                rateLimiterManager.getLimiter(userService.getRandomUserId(), "testRatelimiter"),
+                rateLimiterManager.getLimiter(userService.getRandomUserId(), "testRateLimiter"),
                 targetService::getSomethingUsefulResult);
         return rateLimiterDecorator.apply(String.valueOf(length));
     }
