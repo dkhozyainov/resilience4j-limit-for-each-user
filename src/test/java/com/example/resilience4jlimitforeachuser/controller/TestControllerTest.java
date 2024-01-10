@@ -41,7 +41,7 @@ class TestControllerTest {
     void getTestInfo_apply_rateLimiter_for_different_users() {
         int target = 15;
         int limitForPeriod = rateLimiterRegistry
-                .rateLimiter("testRatelimiter")
+                .rateLimiter("testRateLimiter")
                 .getRateLimiterConfig()
                 .getLimitForPeriod();
 
